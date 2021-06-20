@@ -26,13 +26,12 @@ export const createUser = async (req: any, res: any) => {
   }
 };
 
-export const deleteUser = async (req: any, res: any) => {
+export const deleteUsers = async (req: any, res: any) => {
   try {
-    const { id } = req.body;
-    const user = await User.findById(id);
-    if (!user) throw new Error("No user found.");
-    await user.remove();
-    return res.status(202).json(user);
+    const { ids } = req.body;
+    const query = { _id: { $in: ids } };
+    await User.deleteMany(query);
+    return res.status(201).json({ ids: ids });
   } catch (err) {
     return res.status(400).json({ error: err.toString() });
   }
