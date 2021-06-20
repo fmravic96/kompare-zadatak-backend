@@ -6,7 +6,7 @@ import { dbConnection } from "./models";
 import routes from "./routes";
 
 const app = express();
-const port = 8000;
+const port = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
