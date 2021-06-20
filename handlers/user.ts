@@ -28,7 +28,7 @@ export const createUser = async (req: any, res: any) => {
 
 export const deleteUsers = async (req: any, res: any) => {
   try {
-    const { ids } = req.body;
+    const ids = req.body;
     const query = { _id: { $in: ids } };
     await User.deleteMany(query);
     return res.status(201).json({ ids: ids });
