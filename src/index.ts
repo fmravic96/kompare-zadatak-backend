@@ -1,7 +1,6 @@
 import express from "express";
 import cors from "cors";
-import * as dotenv from "dotenv";
-dotenv.config({ path: __dirname + "/.env" });
+import "dotenv/config";
 
 import { dbConnection } from "./models";
 import routes from "./routes";
@@ -15,9 +14,7 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // To parse the incoming requests with JSON payloads
 app.use("/", routes);
 
-const DB_URI: string = process.env.DB_URI!;
-
-dbConnection(DB_URI).then(async () => {
+dbConnection(process.env.DB_URI!).then(async () => {
   app.listen(port, () => {
     console.log(`Listening on port ${port}`);
   });
